@@ -13,6 +13,11 @@
 		9835E84F27578FC900B4030D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9835E84D27578FC900B4030D /* Main.storyboard */; };
 		9835E85127578FCA00B4030D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9835E85027578FCA00B4030D /* Assets.xcassets */; };
 		9835E85427578FCA00B4030D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9835E85227578FCA00B4030D /* LaunchScreen.storyboard */; };
+		9835E85D2757919F00B4030D /* UnplashPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9835E85B2757919F00B4030D /* UnplashPostTableViewCell.swift */; };
+		9835E85E2757919F00B4030D /* UnplashPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9835E85C2757919F00B4030D /* UnplashPostTableViewCell.xib */; };
+		9882A3002757C83100F5FD58 /* ClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9882A2FF2757C83100F5FD58 /* ClientAPI.swift */; };
+		9882A3022757CF2700F5FD58 /* UnplashPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9882A3012757CF2700F5FD58 /* UnplashPostModel.swift */; };
+		9882A30A2757FF7B00F5FD58 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9882A3092757FF7B00F5FD58 /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		9835E85027578FCA00B4030D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9835E85327578FCA00B4030D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9835E85527578FCA00B4030D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9835E85B2757919F00B4030D /* UnplashPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnplashPostTableViewCell.swift; sourceTree = "<group>"; };
+		9835E85C2757919F00B4030D /* UnplashPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnplashPostTableViewCell.xib; sourceTree = "<group>"; };
+		9882A2FF2757C83100F5FD58 /* ClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAPI.swift; sourceTree = "<group>"; };
+		9882A3012757CF2700F5FD58 /* UnplashPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnplashPostModel.swift; sourceTree = "<group>"; };
+		9882A3092757FF7B00F5FD58 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +73,11 @@
 				9835E85027578FCA00B4030D /* Assets.xcassets */,
 				9835E85227578FCA00B4030D /* LaunchScreen.storyboard */,
 				9835E85527578FCA00B4030D /* Info.plist */,
+				9835E85B2757919F00B4030D /* UnplashPostTableViewCell.swift */,
+				9835E85C2757919F00B4030D /* UnplashPostTableViewCell.xib */,
+				9882A2FF2757C83100F5FD58 /* ClientAPI.swift */,
+				9882A3012757CF2700F5FD58 /* UnplashPostModel.swift */,
+				9882A3092757FF7B00F5FD58 /* ImageLoader.swift */,
 			);
 			path = UnsplashFeed;
 			sourceTree = "<group>";
@@ -126,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9835E85427578FCA00B4030D /* LaunchScreen.storyboard in Resources */,
+				9835E85E2757919F00B4030D /* UnplashPostTableViewCell.xib in Resources */,
 				9835E85127578FCA00B4030D /* Assets.xcassets in Resources */,
 				9835E84F27578FC900B4030D /* Main.storyboard in Resources */,
 			);
@@ -138,8 +154,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9882A30A2757FF7B00F5FD58 /* ImageLoader.swift in Sources */,
 				9835E84C27578FC900B4030D /* ViewController.swift in Sources */,
+				9835E85D2757919F00B4030D /* UnplashPostTableViewCell.swift in Sources */,
 				9835E84827578FC900B4030D /* AppDelegate.swift in Sources */,
+				9882A3022757CF2700F5FD58 /* UnplashPostModel.swift in Sources */,
+				9882A3002757C83100F5FD58 /* ClientAPI.swift in Sources */,
 				9835E84A27578FC900B4030D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
