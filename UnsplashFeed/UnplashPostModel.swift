@@ -43,7 +43,13 @@ class UnplashPostModel: NSObject, Codable {
         
     }
     
-    required init(from decoder: Decoder) throws {
+    override init() {
+        
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        
+        self.init()
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -60,6 +66,7 @@ class UnplashPostModel: NSObject, Codable {
         userName = try user.decode(String.self, forKey: .name)
         
         imageUrl = try urls.decode(String.self, forKey: .rawUrl)
+        
         
     }
 }

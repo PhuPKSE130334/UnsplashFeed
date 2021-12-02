@@ -10,12 +10,12 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var posts: [UnplashPostModel] = []
     
-    var currentPage = 0
+    var currentPage = 1
     
     let spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 60, height:60))
     
@@ -36,11 +36,13 @@ class ViewController: UIViewController {
         
         tableView.register(UINib(nibName: "UnplashPostTableViewCell", bundle: nil), forCellReuseIdentifier: "UnplashPostTableViewCell")
         
+        addLoadingSpinner()
+        
         getUnplashPosts()
         
     }
     
-    func loading() {
+    func addLoadingSpinner() {
         
         spinner.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         
@@ -56,8 +58,12 @@ class ViewController: UIViewController {
         
         view.addSubview(spinner)
         
+    }
+    
+    func startLoading() {
+        
         spinner.startAnimating()
-               
+        
         view.isUserInteractionEnabled = false
         
     }
@@ -92,10 +98,14 @@ class ViewController: UIViewController {
             
             do {
                 
-                strongSelf.posts = try decoder.decode([UnplashPostModel].self, from: data)
-
+                let posts = try decoder.decode([UnplashPostModel].self, from: data)
+                
+                strongSelf.posts.append(contentsOf: posts)
+                
                 DispatchQueue.main.async {
+                    
                     strongSelf.tableView.reloadData()
+                    
                 }
                 
             } catch {
@@ -103,8 +113,61 @@ class ViewController: UIViewController {
                 print("Error when parsing Json")
                 
             }
+            
         }).resume()
     }
+    
+    
+    func reactAPost(id: String, liked: Bool, completionHandler: @escaping (_ newPost: UnplashPostModel) -> Void) {
+        
+        if let urlComponents = URLComponents(string: ClientAPI.shared.baseUrl + ClientAPI.shared.likeUnlikePostQuery(id: id)) {
+            
+            guard let url = urlComponents.url else {return}
+            
+            var request =  URLRequest(url: url)
+            
+            request.httpMethod = liked ? "DELETE" : "POST"
+            
+            request.setValue("Bearer \(ClientAPI.shared.oAuthKey)", forHTTPHeaderField: "Authorization")
+            
+            let config = URLSessionConfiguration.default
+            
+            let session = URLSession(configuration: config)
+            
+            session.dataTask(with: request) { [weak self] data, respone, error in
+                
+                guard self != nil else { return }
+                
+                if let error = error {
+                    
+                    print(error.localizedDescription)
+                    
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    
+                    let model = try decoder.decode(UnplashPhotoModel.self, from: data)
+                    
+                    completionHandler(model.photo)
+                    
+                } catch {
+                    
+                    print("Error when parsing Json")
+                    
+                }
+                
+                
+                
+            }.resume()
+            
+        }
+    }
+    
     
 }
 
@@ -112,12 +175,30 @@ extension ViewController: UnplashPostTablViewCellDelegate {
     
     func reaction(id: String, liked: Bool) {
         
-        print("ok")
+        startLoading()
         
-        stopLoading()
+        reactAPost(id: id, liked: liked) { [weak self] newPost in
+            
+            guard let strongSelf = self else { return }
+            
+            guard let currentIndex = strongSelf.posts.firstIndex(where: {$0.id == newPost.id}) else { return }
+            
+            strongSelf.posts[currentIndex] = newPost
+            
+            DispatchQueue.main.async {
+                
+                strongSelf.tableView.reloadData()
+                
+                strongSelf.stopLoading()
+                
+            }
+            
+        }
+        
     }
     
 }
+
 
 extension ViewController:  UITableViewDataSource, UITableViewDelegate {
     
@@ -148,44 +229,72 @@ extension ViewController:  UITableViewDataSource, UITableViewDelegate {
         
         cell.usernameLabel.text = post.userName
         
+        cell.likedPost = post.likedByUser
+        
+        cell.reactionButton.titleLabel?.text = post.likedByUser ? "Unlike" : "Like"
+        
         cell.unplashImageView.layer.cornerRadius = 10
         
         cell.unplashImageView.backgroundColor = .gray.withAlphaComponent(0.1)
         
         guard let imageUrl = URL(string: post.imageUrl) else { return cell }
-                
+        
         let token = imageLoader.loadImage(imageUrl) { result in
             
             do {
-           
-                let image = try result.get()
-           
-                DispatchQueue.main.async {
                 
-                cell.unplashImageView.image = image
+                let image = try result.get()
+                
+                DispatchQueue.main.async {
+                    
+                    cell.unplashImageView.image = image
                     
                 }
                 
             } catch {
-          
+                
                 print(error)
-              
+                
             }
             
         }
-
+        
         cell.onReuse = {
             
             if let token = token {
-              
+                
                 self.imageLoader.cancelLoad(token)
-              
+                
             }
             
         }
         
         return cell
         
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let currentOffset = scrollView.contentOffset.y
+        
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        
+        if maximumOffset - currentOffset <= 10.0 {
+            
+            currentPage += 1
+            
+            
+            
+            getUnplashPosts()
+            
+            DispatchQueue.main.async {
+                
+                self.tableView.reloadData()
+                
+                
+            }
+            
+        }
     }
     
 }

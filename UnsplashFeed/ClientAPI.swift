@@ -13,6 +13,8 @@ class ClientAPI  {
     
     let apiKey = "NvYilke_sToJYPJgBLf3FIcNJlAL6IA3r0DV6eySiRY"
     
+    let oAuthKey = "d9ksHYIijePI0aj3UNbHlrqaOE2R1k__fC-LmZRVRmY"
+    
     let baseUrl = "https://api.unsplash.com/photos"
     
     func getUnplashPhotoListURL(page: Int) -> String {
@@ -21,9 +23,9 @@ class ClientAPI  {
         //"https://api.unsplash.com/photos?page=1&per_page=20&client_id=NvYilke_sToJYPJgBLf3FIcNJlAL6IA3r0DV6eySiRY"
     }
     
-    func likeUnlikePostURL(id: String) -> String {
+    func likeUnlikePostQuery(id: String) -> String {
         
-        return "\(baseUrl)/\(id)/like?client_id=\(apiKey)"
+        return "/\(id)/like"
         
     }
     

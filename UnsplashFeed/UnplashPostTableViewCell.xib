@@ -33,19 +33,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEP-ko-EaL">
-                                <rect key="frame" x="319" y="285" width="47" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200009 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEP-ko-EaL">
+                                <rect key="frame" x="286.5" y="285" width="79.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9Y-ue-4Gg">
-                                <rect key="frame" x="15" y="283.5" width="26" height="17.5"/>
+                                <rect key="frame" x="15" y="283.5" width="51.5" height="17.5"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" subtitle="">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Like">
+                                        <fragment content="Unlike">
                                             <attributes>
                                                 <color key="NSColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <font key="NSFont" size="14" name="Helvetica"/>
@@ -66,6 +66,7 @@
                             <constraint firstItem="sMa-Hg-OlQ" firstAttribute="top" secondItem="NaH-fP-6eW" secondAttribute="bottom" constant="10" id="7f1-8j-zYF"/>
                             <constraint firstAttribute="bottom" secondItem="SEP-ko-EaL" secondAttribute="bottom" constant="5" id="FKo-EY-lgB"/>
                             <constraint firstAttribute="trailing" secondItem="NaH-fP-6eW" secondAttribute="trailing" constant="15" id="Fiz-b1-yZC"/>
+                            <constraint firstItem="SEP-ko-EaL" firstAttribute="leading" relation="lessThanOrEqual" secondItem="e9Y-ue-4Gg" secondAttribute="trailing" constant="220" id="NQR-Vc-kgY"/>
                             <constraint firstItem="e9Y-ue-4Gg" firstAttribute="leading" secondItem="sMa-Hg-OlQ" secondAttribute="leading" id="Pm8-06-SFj"/>
                             <constraint firstItem="e9Y-ue-4Gg" firstAttribute="top" secondItem="sMa-Hg-OlQ" secondAttribute="bottom" constant="10" id="Wgl-U9-P81"/>
                             <constraint firstItem="sMa-Hg-OlQ" firstAttribute="leading" secondItem="NaH-fP-6eW" secondAttribute="leading" id="YIc-68-1aQ"/>
